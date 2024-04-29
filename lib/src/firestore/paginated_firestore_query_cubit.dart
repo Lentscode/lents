@@ -75,17 +75,27 @@ class PaginatedFirestoreQueryCubit<T> extends Cubit<PaginatedFirestoreQueryState
   }
 }
 
-
+/// The state of a [PaginatedFirestoreQueryCubit].
+///
+/// It contains the list of [data] fetched from Firestore, a flag, [hasMoreData], that indicates if there are more documents to fetch,
+/// and an optional [error] message, in case of an error.
 class PaginatedFirestoreQueryState<T> extends Equatable {
+  /// The list of data fetched from Firestore.
   final List<T> data;
+
+  /// A flag that indicates if there are more documents to fetch.
   final bool hasMoreData;
+
+  /// An optional error message.
   final String? error;
 
+  /// Creates a new [PaginatedFirestoreQueryState] instance.
   const PaginatedFirestoreQueryState({required this.hasMoreData, required this.data, this.error});
 
   @override
   List<Object?> get props => [data, hasMoreData, error];
 
+  /// Creates a copy of this state with the given parameters.
   PaginatedFirestoreQueryState<T> copyWith({List<T>? data, bool? hasMoreData, String? error}) =>
       PaginatedFirestoreQueryState(
         data: data ?? this.data,
