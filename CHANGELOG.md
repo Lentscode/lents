@@ -1,3 +1,7 @@
+## 0.2.0
+
+* Added documentation.
+
 ## 0.1.1
 
 * Added documentation and `CustomTextField`.

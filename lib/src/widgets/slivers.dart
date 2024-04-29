@@ -2,6 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lents/src/firestore/paginated_firestore_query_cubit.dart';
 
+/// A [SliverList] that fetches data from Firestore.
+///
+/// This was created to provide a simple way to fetch data from Firestore and display it in a [CustomScrollView].
+/// The `T` type parameter is the type of the data that will be fetched from Firestore.
+///
+/// It works via a [PaginatedFirestoreQueryCubit], provided via [cubit], that fetches data from Firestore and paginates it.
+/// The data fetching is regulated by a [PageController], provided via [pageController]. Every time the user scrolls to the bottom of the list, the [cubit] will fetch more data.
+/// This happens through a default method called [scrollListener], in case a custom one is not provided.
+///
+/// _P.S._: Obviously, the [PaginatedFirestoreQueryCubit] must be of type `T` to work properly.
 class FirestoreSliverList<T> extends StatefulWidget {
   const FirestoreSliverList(
       {super.key,
@@ -26,7 +36,6 @@ class _FirestoreSliverListState<T> extends State<FirestoreSliverList<T>> {
   @override
   void initState() {
     super.initState();
-
     widget.pageController.addListener(widget.scrollListener ?? scrollListener);
   }
 

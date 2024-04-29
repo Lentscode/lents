@@ -4,13 +4,13 @@ import 'package:geolocator/geolocator.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
+/// A set of methods to work with files, especially images.
 class FileUtilities {
+  /// Opens the camera and allows the user to take or choose a picture and then crop it.
   static Future<File?> getImageAndCrop(
       {double ratioX = 3, double ratioY = 4, List<CropAspectRatioPreset> presets = const []}) async {
-    // Crea un'istanza di ImagePicker
     final ImagePicker picker = ImagePicker();
 
-    // Scegli l'immagine dalla galleria o dalla fotocamera
     final XFile? pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
       maxWidth: 1800,
@@ -19,7 +19,6 @@ class FileUtilities {
     );
 
     if (pickedFile != null) {
-      // Passa l'immagine a ImageCropper per il ritaglio
       final CroppedFile? croppedFile = await ImageCropper().cropImage(
           sourcePath: pickedFile.path,
           aspectRatio: CropAspectRatio(ratioX: ratioX, ratioY: ratioY),
@@ -29,7 +28,7 @@ class FileUtilities {
         return File(croppedFile.path);
       }
     }
-    return null; // Restituisce null se l'utente annulla la scelta
+    return null;
   }
 }
 
@@ -54,7 +53,9 @@ class TimeUtilities {
   }
 }
 
+/// A set of methods to work with the user's location.
 class LocationUtilities {
+  /// Gets the user's current position.
   static Future<Position?> getPosition() async {
     await Geolocator.checkPermission().then((value) async {
       if (value == LocationPermission.denied) {
