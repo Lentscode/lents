@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -68,4 +69,36 @@ class LocationUtilities {
     });
     return null;
   }
+}
+
+/// A set of methods to show SnackBars.
+class SnackBarUtilities {
+  /// Shows a SnackBar.
+  ///
+  /// * [context] is the context of the widget.
+  /// * [content] is the widget to show.
+  /// * [duration] is the duration of the SnackBar.
+  /// * [behavior] is the behavior of the SnackBar, wether is floating or fixed (floating by default).
+  /// * [animation] defines an animation that the Snackbar follows appearing.
+  /// * [dismissDirection] is the direction in which the SnackBar can be dismissed.
+  /// * [onVisible] is a callback that is called when the SnackBar is visible.
+  static void show(
+    BuildContext context,
+    Widget content, {
+    Duration duration = const Duration(seconds: 2),
+    SnackBarBehavior behavior = SnackBarBehavior.floating,
+    Animation<double>? animation,
+    DismissDirection? dismissDirection,
+    void Function()? onVisible,
+  }) =>
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: content,
+          duration: duration,
+          behavior: behavior,
+          animation: animation,
+          dismissDirection: dismissDirection,
+          onVisible: onVisible,
+        ),
+      );
 }
