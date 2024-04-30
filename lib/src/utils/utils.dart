@@ -86,7 +86,8 @@ class SnackBarUtilities {
     BuildContext context,
     Widget content, {
     Duration duration = const Duration(seconds: 2),
-    SnackBarBehavior behavior = SnackBarBehavior.floating,
+    SnackBarBehavior behavior = SnackBarBehavior.fixed,
+    double elevation = 0,
     Animation<double>? animation,
     DismissDirection? dismissDirection,
     void Function()? onVisible,
@@ -99,6 +100,7 @@ class SnackBarUtilities {
           animation: animation,
           dismissDirection: dismissDirection,
           onVisible: onVisible,
+          elevation: elevation,
         ),
       );
 }
